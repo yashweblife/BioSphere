@@ -1,3 +1,3 @@
 import { SequenceFilter } from "./Projects/AA_Fasta_Seq_Filter";
 
-SequenceFilter("test_data_align.fas");
+SequenceFilter("H5_PB2_all_212_Copy.fasta");
