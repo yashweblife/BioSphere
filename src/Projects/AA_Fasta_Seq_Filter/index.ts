@@ -68,10 +68,47 @@ export async function SequenceFilter(fileName:string = './test_data/test_data_al
     for(let i=0;i<filtered_data.length;i++){
         output += filtered_data[i].toString() + "\n";
     }
-    await writeDataToFile(output);
+    await writeDataToFile(output, `./sequence_filter_output-${new Date().getTime()}.fasta`);
     const end_time = performance.now();
-    console.log("Time taken:", end_time - start_time, "ms");
+    console.log("SequenceFilter Time taken:", end_time - start_time, "ms");
 }
+export async function SequenceFilter1(fileName:string = './test_data/test_data_align.fas'){
+    const start_time = performance.now();
+    console.log("\n\n\nSTART");
+    const fasta_points = await getDataFromFile(fileName);
+    let filtered_data = [...fasta_points].slice(0,5);
+    console.log(filtered_data.length);
+    function test(arr:FastaPoint[], index=0){
+        if(index === arr.length){
+            return arr
+        }
+        console.log("PIVOT:\t", arr[index].header);
+        const pivot = arr[index];
+        for(let i=index+1;i<arr.length;i++){
+            console.log("COMPARING TO:\t", arr[i].header);
+            const sim = get_similarity_score(pivot.sequence,arr[i].sequence);
+            const th = Math.round(pivot.sequence.length * PERCENTAGE);
+            console.log("SCORE:\t", sim, "/", th);
+            if(sim >= th){
+                console.log("REMOVING:", arr[i].header);
+                arr.splice(i,1);
+            }
+        }
+        test(arr, index+1);
+    }
+    return;
+    const output_arr:FastaPoint[] = test(filtered_data) || [];
+    console.log(output_arr);
+    console.log("\n\n\nEND");
+    let output = output_arr.map(x => x.toString()).join("\n");
+    for(let i=0;i<filtered_data.length;i++){
+        output += filtered_data[i].toString() + "\n";
+    }
+    await writeDataToFile(output, `./sequence_filter_1_output-${new Date().getTime()}.fasta`);
+    const end_time = performance.now();
+    console.log("SequenceFilter1Time taken:", end_time - start_time, "ms");
+}
+
 
 function get_similarity_score(seq1: string, seq2: string){
     let score = 0;
