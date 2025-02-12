@@ -1,5 +1,5 @@
 import { getDataFromFile, SequenceFilter, writeDataToFile } from "./Projects/AA_Fasta_Seq_Filter";
-const FILE_NAME = "H5_HA_Nuc_MAFFT.fasta";
+const FILE_NAME = "H5_PA_Nuc_MAAFT.fasta";
 import FastaPoint from "./lib/FastaPoint"
 
 SequenceFilter(FILE_NAME);
@@ -17,5 +17,3 @@ SequenceFilter(FILE_NAME);
 //     })
 //     writeDataToFile(output, `./sequence_filter_output-${new Date().getTime()}.fasta`);
 // }
-
-//emu b
