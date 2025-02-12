@@ -5,14 +5,18 @@ const PERCENTAGE = 0.995
 
 export async function getDataFromFile(path: string){
     const p = resolve(__dirname,"../../TEST_DATA",path)
-    console.log(p)
     const files = Bun.file(p);
     if(!files){
-        console.log("NO FILE");
+        console.log("NO FILE FOUND");
         return;
     }
-    console.log("Starting File Breakdown");
     const data = await files.text();
+    if(!data){
+        console.log("NO DATA");
+        return;
+    }
+    console.log("Found Data");
+    console.log("Starting File Breakdown");
     //split fasta on >
     const initial_split = data.split('>');
     const initial_len = initial_split.length-1;
