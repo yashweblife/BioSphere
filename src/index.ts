@@ -1,5 +1,19 @@
-import { getDataFromFile, SequenceFilter } from "./Projects/AA_Fasta_Seq_Filter";
-const FILE_NAME = "H5_PB2_prep_MAFFT.fasta";
-// const TEST_FILES = ["H5_PB2_all_212_Copy.fasta", "test_data_align.fas", "2024_11_02_TestAlignment.fas"]
-// TEST_FILES.forEach(file => SequenceFilter(file));
+import { getDataFromFile, SequenceFilter, writeDataToFile } from "./Projects/AA_Fasta_Seq_Filter";
+const FILE_NAME = "H5_HA_Nuc_MAFFT.fasta";
+import FastaPoint from "./lib/FastaPoint"
+
 SequenceFilter(FILE_NAME);
+// async function test(){
+//     const data = await FastaPoint.fromFile(FILE_NAME)
+//     data.forEach(x => {
+//         if(x.at(108) == "I"){
+//             x.header = x.header.concat("V109I");
+//             console.log(x.header)
+//         }
+//     })
+//     let output = "";
+//     data.forEach(x => {
+//         output += x.toString() + "\n";
+//     })
+//     writeDataToFile(output, `./sequence_filter_output-${new Date().getTime()}.fasta`);
+// }
